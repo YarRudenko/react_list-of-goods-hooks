@@ -22,7 +22,7 @@ export enum SortType {
 }
 
 export const App: React.FC = () => {
-  const [sortBy, setSortBy] = useState<SortType | null>(null);
+  const [sortBy, setSortBy] = useState<SortType>(SortType.None);
   const [isReversed, setIsReversed] = useState<boolean>(false);
 
   const getSortedGoods = (): string[] => {
@@ -45,7 +45,8 @@ export const App: React.FC = () => {
     setSortBy(current => {
       if (current === method) {
         setIsReversed(false);
-        return null;
+
+        return SortType.None;
       }
 
       return method;
@@ -57,12 +58,12 @@ export const App: React.FC = () => {
   };
 
   const handleReset = () => {
-    setSortBy(null);
+    setSortBy(SortType.None);
     setIsReversed(false);
   };
 
   const displayedGoods = getSortedGoods();
-  const isResetVisible = sortBy !== null || isReversed;
+  const isResetVisible = sortBy !== SortType.None || isReversed;
 
   return (
     <div className="section content">
